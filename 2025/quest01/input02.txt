@@ -1,0 +1,3 @@
+Ascalthar,Skarkael,Vyrbel,Havisis,Tarlzral,Paltheldrith,Hazthel,Hazwyris,Jarzyth,Mornxal,Vaelacris,Xardaros,Lirzyph,Sylacris,Nexor,Vorndra,Cyndhynd,Ralkyris,Cragkael,Galoryn
+
+L7,R12,L8,R12,L9,R18,L16,R13,L9,R12,L5,R11,L5,R14,L5,R18,L5,R15,L5,R17,L5,R18,L16,R12,L14,R7,L11,R9,L12

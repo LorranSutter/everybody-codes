@@ -1,0 +1,3 @@
+Krynnfal,Felnnyn,Norakmarn,Glynngnaris,Zorasis,Ulmarsarix,Rynquin,Wyntor,Harnmarn,Selkvel
+
+L6,R8,L7,R1,L2,R7,L1,R6,L5,R2,L7
