@@ -27,6 +27,7 @@ Part 3:
 - Output the name of the final position.
 """
 
+
 def part1():
     names, instructions = parse_file()
     l_names = len(names)
@@ -35,11 +36,12 @@ def part1():
     for i in range(len(instructions)):
         position += instructions[i]
         if position >= l_names:
-            position = l_names-1
+            position = l_names - 1
         elif position < 0:
             position = 0
 
     print("My name is", names[position])
+
 
 def part2():
     names, instructions = parse_file()
@@ -50,6 +52,7 @@ def part2():
         position = (position + instructions[i]) % l_names
 
     print("The name of my first parent is", names[position])
+
 
 def part3():
     names, instructions = parse_file()
@@ -63,21 +66,23 @@ def part3():
 
     print("The name of my second parent is", names[position])
 
+
 def parse_file() -> Tuple[List[str], List[int]]:
     names = []
     instructions = []
     with open(abs_file_path) as f:
-        names = f.readline().strip().split(',')
+        names = f.readline().strip().split(",")
 
-        f.readline() # Skip the blank line
+        f.readline()  # Skip the blank line
 
-        instructions = f.readline().strip().split(',')
+        instructions = f.readline().strip().split(",")
         for i in range(len(instructions)):
-            if instructions[i][0] == 'R':
+            if instructions[i][0] == "R":
                 instructions[i] = int(instructions[i][1:])
             else:
                 instructions[i] = -int(instructions[i][1:])
 
     return names, instructions
+
 
 part3()
