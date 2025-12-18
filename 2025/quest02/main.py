@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Tuple
 
+from utils.timer import timer
+
 """
 Preprocessing:
 - Just get the two integers of the A point in the file.
@@ -19,6 +21,7 @@ Part 3:
 """
 
 
+@timer
 def part1():
     A = parse_file("input01.txt")
     R = tuple([0, 0])
@@ -32,6 +35,7 @@ def part1():
     print("Final result:", formatted_result)
 
 
+@timer
 def part2():
     A = parse_file("input_sample02.txt")
     size = 101
@@ -58,6 +62,7 @@ def part2():
     print("Total engraved points:", engrave)
 
 
+@timer
 def part3():
     A = parse_file("input03.txt")
     size = 1001

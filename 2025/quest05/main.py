@@ -3,6 +3,8 @@ from typing import List, Tuple
 from functools import cmp_to_key
 from dataclasses import dataclass
 
+from utils.timer import timer
+
 """
 Preprocessing:
 - Part 1: Read the input file and parse into a list numbers and a sword ID.
@@ -40,6 +42,7 @@ class Sword:
     segments: List[Segment] = None
 
 
+@timer
 def part1():
     _, nums = parse_file_1("input01.txt")
 
@@ -48,6 +51,7 @@ def part1():
     print("Quality of the sword:", sword.quality)
 
 
+@timer
 def part2():
     _, nums_list = parse_file_2("input02.txt")
 
@@ -64,6 +68,7 @@ def part2():
     )
 
 
+@timer
 def part3():
     sword_ids, nums_list = parse_file_2("input03.txt")
 
@@ -72,8 +77,8 @@ def part3():
         swords[i] = evaluate_sword(nums_list[i], sword_ids[i])
 
     swords.sort(key=cmp_to_key(compare_swords), reverse=True)
-    
-    checksum = sum([i*s.sword_id for i, s in enumerate(swords, 1)])
+
+    checksum = sum([i * s.sword_id for i, s in enumerate(swords, 1)])
 
     print("Checksum of the swords:", checksum)
 

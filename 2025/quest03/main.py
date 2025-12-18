@@ -1,6 +1,8 @@
 import os
 from typing import List
 
+from utils.timer import timer
+
 """
 Preprocessing:
 - Read the input file and split it into a list of integers.
@@ -21,6 +23,7 @@ Part 3:
 """
 
 
+@timer
 def part1():
     crates = parse_file("input01.txt")
     crates = set(crates)
@@ -28,6 +31,7 @@ def part1():
     print("Largest possible set:", sum(crates))
 
 
+@timer
 def part2():
     crates = parse_file("input02.txt")
     crates = list(set(crates))
@@ -36,6 +40,7 @@ def part2():
     print("Smallest possible set:", sum(crates[:20]))
 
 
+@timer
 def part3():
     crates = parse_file("input03.txt")
 

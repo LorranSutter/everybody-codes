@@ -2,6 +2,8 @@ import os
 import math
 from typing import Tuple
 
+from utils.timer import timer
+
 """
 Preprocessing:
 - Read the input file and split it into a list of integers.
@@ -31,6 +33,7 @@ Part 3:
 """
 
 
+@timer
 def part1():
     teeth_list = parse_file("input01.txt")
     gear_1_turns = 2025
@@ -42,6 +45,7 @@ def part1():
     print("Number of turns of the last gear:", int(ratio * gear_1_turns))
 
 
+@timer
 def part2():
     teeth_list = parse_file("input02.txt")
     last_gear_turns = 10000000000000
@@ -53,6 +57,7 @@ def part2():
     print("Number of turns of the first gear:", math.ceil(last_gear_turns / ratio))
 
 
+@timer
 def part3():
     teeth_list = parse_file_3("input03.txt")
     gear_1_turns = 100
@@ -84,7 +89,7 @@ def parse_file_3(file_name: str) -> Tuple[Tuple[int]]:
 
     teeth_list = list()
     with open(abs_file_path) as f:
-        teeth_list = tuple([tuple(map(int,line.strip().split("|"))) for line in f])
+        teeth_list = tuple([tuple(map(int, line.strip().split("|"))) for line in f])
 
     return teeth_list
 

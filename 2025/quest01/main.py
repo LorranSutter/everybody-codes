@@ -1,9 +1,8 @@
 import os
 from typing import List, Tuple
 
-script_dir = os.path.dirname(__file__)
-rel_path = "input03.txt"
-abs_file_path = os.path.join(script_dir, rel_path)
+from utils.timer import timer
+
 
 """
 Preprocessing:
@@ -28,8 +27,9 @@ Part 3:
 """
 
 
+@timer
 def part1():
-    names, instructions = parse_file()
+    names, instructions = parse_file("input01.txt")
     l_names = len(names)
 
     position = 0
@@ -43,8 +43,9 @@ def part1():
     print("My name is", names[position])
 
 
+@timer
 def part2():
-    names, instructions = parse_file()
+    names, instructions = parse_file("input02.txt")
     l_names = len(names)
 
     position = 0
@@ -54,8 +55,9 @@ def part2():
     print("The name of my first parent is", names[position])
 
 
+@timer
 def part3():
-    names, instructions = parse_file()
+    names, instructions = parse_file("input03.txt")
     l_names = len(names)
 
     position = 0
@@ -67,7 +69,10 @@ def part3():
     print("The name of my second parent is", names[position])
 
 
-def parse_file() -> Tuple[List[str], List[int]]:
+def parse_file(file_name: str) -> Tuple[str]:
+    script_dir = os.path.dirname(__file__)
+    abs_file_path = os.path.join(script_dir, file_name)
+
     names = []
     instructions = []
     with open(abs_file_path) as f:
