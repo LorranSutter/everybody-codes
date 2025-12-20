@@ -1,4 +1,8 @@
-# everybody-codes
+# :duck: Everybody Codes
+
+This repository contains my solutions for the [Everybody Codes](https://everybody.codes) event.
+
+Everybody Codes is an annual coding challenge that runs throughout November, featuring daily programming puzzles released Monday to Friday. Each quest challenges your problem-solving skills and algorithmic thinking.
 
 ## Creating a New Quest
 
