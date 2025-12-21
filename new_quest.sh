@@ -42,7 +42,17 @@ from typing import Tuple
 from utils.timer import timer
 
 """
-Explanation
+Preprocessing:
+-
+
+Part 1:
+-
+
+Part 2:
+-
+
+Part 3:
+-
 """
 
 
