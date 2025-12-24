@@ -1,0 +1,27 @@
+Erasthyn,Haztaril,Zynyth,Iskarthyris,Ravtaril,Zynthys,Vyrlthyn,Galthys,Zynmyr,Ravthyris,Erasyth,Galmyr,Fyronar,Fyrmyr,Vyrlyth,Zyntaril,Raelmyr,Iskaronar,Galtaril,Mavnyn,Iskarthys,Vyrlmyr,Vyrlnyn,Galnyn,Mavmyr,Galthyris,Hazmyr,Raeltaril,Fyryth,Galthyn,Mavthyn,Galaris,Iskaryth,Hazthyris,Zynophis,Galonar,Hazonar,Raelophis,Raelthyris,Mavyth,Zynaris,Vyrlaris,Vyrlonar,Vyrlthyris,Galyth,Raelyth,Raelonar,Vyrlthys,Ravnyn,Iskararis,Iskartaril,Zynthyris,Ravmyr,Iskarmyr,Erasmyr,Iskarophis,Ravophis,Hazyth,Fyrthyris,Zynthyn,Mavthys,Mavaris,Erasonar,Iskarthyn,Zynonar,Mavophis,Fyrnyn,Galophis,Raelthys,Hazophis,Ravaris,Erasophis,Ravonar,Mavtaril,Fyrophis,Erasthyris,Iskarnyn,Fyrthys,Erasthys,Fyrthyn,Zynnyn,Vyrlophis,Raelnyn,Ravthyn,Hazthyn,Mavthyris,Fyraris,Raelthyn,Hazaris,Haznyn,Vyrltaril,Hazthys,Mavonar,Ravyth,Erasaris,Fyrtaril,Erastaril,Ravthys,Erasnyn,Raelaris
+
+y > r,n,t,s,v
+V > y
+e > l
+n > a,y,t,m,o,n
+i > s,l
+p > h
+I > s
+a > v,r,s
+R > a
+h > y,i
+H > a
+v > a,y,t,m,o,n
+Z > y
+r > l,i,a,y,t,m,o,n,v
+t > h,a
+o > p,n
+M > a
+E > r
+m > y
+z > a,y,t,m,o,n
+G > a
+k > a
+l > t,a,y,m,o,n
+F > y
+s > v,a,y,t,m,o,n

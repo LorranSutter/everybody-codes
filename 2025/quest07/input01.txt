@@ -1,0 +1,16 @@
+Ulkfeth,Falgarath,Falfeth,Ulkgarath,Ulkzion,Falzion,Azgarath,Azfeth,Azzion
+
+A > z
+z > g,b,i
+r > a
+f > e
+g > a
+F > a
+e > t
+a > r,t,b
+i > o
+l > b,z,g,f
+t > h
+U > l
+k > z,g,f
+o > n
