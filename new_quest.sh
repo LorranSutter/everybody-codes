@@ -1,27 +1,41 @@
 #!/bin/bash
 
 # Check if arguments are provided
-if [ -z "$1" ] || [ -z "$2" ]; then
-    echo "Usage: $0 <year> <quest>"
-    echo "Example: $0 2025 1"
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+    echo "Usage: $0 <year> <events|stories> <quest>"
+    echo "Example: $0 2025 events 1"
+    exit 1
+fi
+
+# Validate if type of event or story is valid
+valid_types=("events" "stories")
+if ! [[ "${valid_types[@]}" =~ "$2" ]]; then
+    echo "Error: Invalid events or stories type. Valid types are: ${valid_types[*]}"
     exit 1
 fi
 
 # Validate inputs are numbers
-if ! [[ "$1" =~ ^[0-9]+$ ]] || ! [[ "$2" =~ ^[0-9]+$ ]]; then
-    echo "Error: Both year and quest must be numbers"
+if ! [[ "$1" =~ ^[0-9]+$ ]] || ! [[ "$3" =~ ^[0-9]+$ ]]; then
+    echo "Error: Year and quest must be numbers"
     exit 1
 fi
 
 year="$1"
+type="$2"
 # Format quest with leading zero (2 digits)
-quest=$(printf "%02d" "$2")
-folder_name="${year}/quest${quest}"
+quest=$(printf "%02d" "$3")
+folder_name="${year}/${type}/quest${quest}"
 
 # Create year folder if it doesn't exist
 if [ ! -d "$year" ]; then
     mkdir "$year"
     echo "Created folder: $year"
+fi
+
+# Create type folder if it doesn't exist
+if [ ! -d "$year/$type" ]; then
+    mkdir "$year/$type"
+    echo "Created folder: $year/$type"
 fi
 
 # Check if quest folder already exists
