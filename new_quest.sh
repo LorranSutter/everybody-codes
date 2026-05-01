@@ -2,15 +2,15 @@
 
 # Check if arguments are provided
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
-    echo "Usage: $0 <year> <events|stories> <quest>"
-    echo "Example: $0 2025 events 1"
+    echo "Usage: $0 <year> <event|story> <quest>"
+    echo "Example: $0 2025 event 1"
     exit 1
 fi
 
 # Validate if type of event or story is valid
-valid_types=("events" "stories")
+valid_types=("event" "story")
 if ! [[ "${valid_types[@]}" =~ "$2" ]]; then
-    echo "Error: Invalid events or stories type. Valid types are: ${valid_types[*]}"
+    echo "Error: Invalid event or story type. Valid types are: ${valid_types[*]}"
     exit 1
 fi
 
