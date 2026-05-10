@@ -7,39 +7,15 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## Progress
 
-> **Overall: 49/54 parts solved (91%)**
+> **Overall: 48/54 parts solved (89%)**
 
-### 2024 — Story
+### [2024 — Story](./2024/story/)
 
 `████████████████████` **9/9** parts solved (100%)
 
-| Quest | Part 1 | Part 2 | Part 3 |
-|:------|:------:|:------:|:------:|
-| Quest 01 | ⭐ | ⭐ | ⭐ |
-| Quest 02 | ⭐ | ⭐ | ⭐ |
-| Quest 03 | ⭐ | ⭐ | ⭐ |
+### [2025 — Event](./2025/event/)
 
-### 2025 — Event
-
-`██████████████████░░` **40/45** parts solved (89%)
-
-| Quest | Part 1 | Part 2 | Part 3 |
-|:------|:------:|:------:|:------:|
-| Quest 01 | ⭐ | ⭐ | ⭐ |
-| Quest 02 | ⭐ | ⭐ | ⭐ |
-| Quest 03 | ⭐ | ⭐ | ⭐ |
-| Quest 04 | ⭐ | ⭐ | ⭐ |
-| Quest 05 | ⭐ | ⭐ | ⭐ |
-| Quest 06 | ⭐ | ⭐ | ⭐ |
-| Quest 07 | ⭐ | ⭐ | ⭐ |
-| Quest 08 | ⭐ | ⭐ | ⬚ |
-| Quest 09 | ⭐ | ⭐ | ⭐ |
-| Quest 10 | ⭐ | ⬚ | ⬚ |
-| Quest 11 | ⭐ | ⭐ | ⭐ |
-| Quest 12 | ⭐ | ⭐ | ⭐ |
-| Quest 13 | ⭐ | ⭐ | ⭐ |
-| Quest 14 | ⭐ | ⭐ | ⭐ |
-| Quest 15 | ⭐ | ⬚ | ⬚ |
+`█████████████████░░░` **39/45** parts solved (87%)
 
 <!-- SUMMARY:END -->
 
