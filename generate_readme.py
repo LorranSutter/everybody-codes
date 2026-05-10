@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """
-Scans all quest folders and generates a progress summary in README.md.
+Scans all quest folders and generates progress summaries:
+- Root README.md: overall stats + progress bars per year/type (with titles)
+- year/type/README.md: detailed quest tables with stars
 
 For each quest's main.py, it checks whether part1(), part2(), part3() contain
 a "# TODO" comment in the first line of the function body. If so, the part is
 considered unsolved.
 
-The summary is injected between <!-- SUMMARY:START --> and <!-- SUMMARY:END -->
+The root summary is injected between <!-- SUMMARY:START --> and <!-- SUMMARY:END -->
 markers in README.md, preserving all other content.
+
+Each year/type/README.md is managed between <!-- SUMMARY:START --> and
+<!-- SUMMARY:END --> markers as well, so any content outside the markers
+(like the title) is preserved after the first run.
 """
 
 import os
@@ -82,14 +88,16 @@ def check_parts(main_file: Path) -> dict:
     return parts
 
 
-def generate_summary(results: dict) -> str:
-    """Generates the markdown summary from scan results."""
+def generate_root_summary(results: dict) -> str:
+    """Generates the root README summary with progress bars only (no tables)."""
     lines = []
     lines.append("## Progress")
     lines.append("")
 
     total_solved = 0
     total_parts = 0
+
+    section_lines = []
 
     for year in sorted(results.keys()):
         for quest_type in sorted(results[year].keys()):
@@ -107,56 +115,86 @@ def generate_summary(results: dict) -> str:
             filled = round(pct / 5)
             bar = "█" * filled + "░" * (20 - filled)
 
-            lines.append(f"### {year} — {type_label}")
-            lines.append("")
-            lines.append(f"`{bar}` **{solved}/{total}** parts solved ({pct:.0f}%)")
-            lines.append("")
-            lines.append("| Quest | Part 1 | Part 2 | Part 3 |")
-            lines.append("|:------|:------:|:------:|:------:|")
-
-            for quest_num in sorted(quests.keys()):
-                parts = quests[quest_num]
-                cols = []
-                for p in [1, 2, 3]:
-                    cols.append("⭐" if parts.get(p, False) else "⬚")
-                lines.append(
-                    f"| Quest {quest_num:02d} | {cols[0]} | {cols[1]} | {cols[2]} |"
-                )
-
-            lines.append("")
+            section_lines.append(f"### [{year} — {type_label}](./{year}/{quest_type}/)")
+            section_lines.append("")
+            section_lines.append(f"`{bar}` **{solved}/{total}** parts solved ({pct:.0f}%)")
+            section_lines.append("")
 
     # Overall summary
     overall_pct = (total_solved / total_parts * 100) if total_parts > 0 else 0
-    lines.insert(2, f"> **Overall: {total_solved}/{total_parts} parts solved ({overall_pct:.0f}%)**")
-    lines.insert(3, "")
+    lines.append(f"> **Overall: {total_solved}/{total_parts} parts solved ({overall_pct:.0f}%)**")
+    lines.append("")
+    lines.extend(section_lines)
 
     return "\n".join(lines)
 
 
-def update_readme(root: Path, summary: str) -> None:
+def generate_type_readme(year: str, quest_type: str, quests: dict) -> str:
+    """Generates the quest table for a year/type README."""
+    type_label = quest_type.capitalize()
+
+    solved = sum(1 for q in quests.values() for p, s in q.items() if s)
+    total = sum(len(q) for q in quests.values())
+    pct = (solved / total * 100) if total > 0 else 0
+    filled = round(pct / 5)
+    bar = "█" * filled + "░" * (20 - filled)
+
+    lines = []
+    lines.append(f"`{bar}` **{solved}/{total}** parts solved ({pct:.0f}%)")
+    lines.append("")
+    lines.append("| Quest | Part 1 | Part 2 | Part 3 |")
+    lines.append("|:------|:------:|:------:|:------:|")
+
+    for quest_num in sorted(quests.keys()):
+        parts = quests[quest_num]
+        cols = []
+        for p in [1, 2, 3]:
+            cols.append("⭐" if parts.get(p, False) else "⬚")
+        lines.append(
+            f"| Quest {quest_num:02d} | {cols[0]} | {cols[1]} | {cols[2]} |"
+        )
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+def inject_between_markers(content: str, summary: str, default_header: str) -> str:
     """
-    Injects the summary between <!-- SUMMARY:START --> and <!-- SUMMARY:END -->
-    markers in README.md. Adds the markers + summary at the end of the header
-    section if they don't exist yet.
+    Replaces content between <!-- SUMMARY:START --> and <!-- SUMMARY:END --> markers.
+    If markers don't exist, creates the file with a header + markers.
     """
+    start_marker = "<!-- SUMMARY:START -->"
+    end_marker = "<!-- SUMMARY:END -->"
+    block = f"{start_marker}\n{summary}\n{end_marker}"
+
+    if start_marker in content and end_marker in content:
+        pattern = re.compile(
+            re.escape(start_marker) + r".*?" + re.escape(end_marker),
+            re.DOTALL,
+        )
+        return pattern.sub(block, content)
+    else:
+        # No markers yet — create with default header
+        return f"{default_header}\n\n{block}\n"
+
+
+def update_root_readme(root: Path, summary: str) -> None:
+    """Injects the summary into the root README.md between markers."""
     readme_path = root / "README.md"
     content = readme_path.read_text()
 
     start_marker = "<!-- SUMMARY:START -->"
     end_marker = "<!-- SUMMARY:END -->"
-
     block = f"{start_marker}\n{summary}\n{end_marker}"
 
     if start_marker in content and end_marker in content:
-        # Replace existing summary
         pattern = re.compile(
             re.escape(start_marker) + r".*?" + re.escape(end_marker),
             re.DOTALL,
         )
         new_content = pattern.sub(block, content)
     else:
-        # Insert after the first paragraph (after the repo description)
-        # Find the end of the intro paragraph
+        # Insert after the intro paragraph
         intro_pattern = re.compile(
             r"(# .+\n\n.+\n\n.+\n)"
         )
@@ -167,17 +205,41 @@ def update_readme(root: Path, summary: str) -> None:
                 content[:insert_pos] + "\n" + block + "\n\n" + content[insert_pos:]
             )
         else:
-            # Fallback: append at the end
             new_content = content + "\n\n" + block + "\n"
 
     readme_path.write_text(new_content)
-    print(f"✅ README.md updated with progress summary")
+    print(f"✅ Updated {readme_path}")
+
+
+def update_type_readme(root: Path, year: str, quest_type: str, table_summary: str) -> None:
+    """Creates or updates the year/type/README.md with the quest table."""
+    type_label = quest_type.capitalize()
+    readme_path = root / year / quest_type / "README.md"
+    default_header = f"# {year} — {type_label}"
+
+    if readme_path.exists():
+        content = readme_path.read_text()
+    else:
+        content = ""
+
+    new_content = inject_between_markers(content, table_summary, default_header)
+    readme_path.write_text(new_content)
+    print(f"✅ Updated {readme_path}")
 
 
 def main():
     results = find_quests(ROOT)
-    summary = generate_summary(results)
-    update_readme(ROOT, summary)
+
+    # Generate and update root README
+    root_summary = generate_root_summary(results)
+    update_root_readme(ROOT, root_summary)
+
+    # Generate and update each year/type README
+    for year in sorted(results.keys()):
+        for quest_type in sorted(results[year].keys()):
+            quests = results[year][quest_type]
+            table_summary = generate_type_readme(year, quest_type, quests)
+            update_type_readme(ROOT, year, quest_type, table_summary)
 
 
 if __name__ == "__main__":
