@@ -170,7 +170,7 @@ def generate_type_readme(year: str, quest_type: str, quests: dict) -> str:
         for p in [1, 2, 3]:
             cols.append("⭐" if parts.get(p, False) else "⬚")
         lines.append(
-            f"| Quest {quest_num:02d} | {cols[0]} | {cols[1]} | {cols[2]} |"
+            f"| [Quest {quest_num:02d}](./quest{quest_num:02d}/) | {cols[0]} | {cols[1]} | {cols[2]} |"
         )
 
     lines.append("")
