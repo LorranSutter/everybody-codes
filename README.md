@@ -72,3 +72,11 @@ python3 -m 2025.event.quest01.main
 ```
 
 Replace `2025` with the desired year and `quest01` with the specific quest you want to run.
+
+## Updating Progress Summary
+
+To update the progress summary in this README after solving new parts, run the `generate_readme.py` script:
+
+```bash
+python3 generate_readme.py
+```
