@@ -88,7 +88,26 @@ def check_parts(main_file: Path) -> dict:
     return parts
 
 
-def generate_root_summary(results: dict) -> str:
+def read_type_title(root: Path, year: str, quest_type: str) -> str:
+    """
+    Reads the H1 title from year/type/README.md.
+    Falls back to 'year — Type' if the file doesn't exist or has no H1.
+    """
+    type_label = quest_type.capitalize()
+    fallback = f"{year} — {type_label}"
+    readme_path = root / year / quest_type / "README.md"
+
+    if not readme_path.exists():
+        return fallback
+
+    for line in readme_path.read_text().splitlines():
+        if line.startswith("# "):
+            return line[2:].strip()
+
+    return fallback
+
+
+def generate_root_summary(root: Path, results: dict) -> str:
     """Generates the root README summary with progress bars only (no tables)."""
     lines = []
     lines.append("## Progress")
@@ -102,7 +121,7 @@ def generate_root_summary(results: dict) -> str:
     for year in sorted(results.keys()):
         for quest_type in sorted(results[year].keys()):
             quests = results[year][quest_type]
-            type_label = quest_type.capitalize()
+            title = read_type_title(root, year, quest_type)
 
             solved = sum(
                 1 for q in quests.values() for p, s in q.items() if s
@@ -115,7 +134,7 @@ def generate_root_summary(results: dict) -> str:
             filled = round(pct / 5)
             bar = "█" * filled + "░" * (20 - filled)
 
-            section_lines.append(f"### [{year} — {type_label}](./{year}/{quest_type}/)")
+            section_lines.append(f"### [{title}](./{year}/{quest_type}/)")
             section_lines.append("")
             section_lines.append(f"`{bar}` **{solved}/{total}** parts solved ({pct:.0f}%)")
             section_lines.append("")
@@ -231,7 +250,7 @@ def main():
     results = find_quests(ROOT)
 
     # Generate and update root README
-    root_summary = generate_root_summary(results)
+    root_summary = generate_root_summary(ROOT, results)
     update_root_readme(ROOT, root_summary)
 
     # Generate and update each year/type README
