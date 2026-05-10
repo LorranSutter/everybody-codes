@@ -1,4 +1,4 @@
-# 2024 — Story
+# 2024 — Story: Echoes of Enigmatus
 
 <!-- SUMMARY:START -->
 `████████████████████` **9/9** parts solved (100%)

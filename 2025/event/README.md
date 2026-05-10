@@ -1,4 +1,4 @@
-# 2025 — Event
+# 2025 — Event: The Song of Ducks and Dragons
 
 <!-- SUMMARY:START -->
 `█████████████████░░░` **39/45** parts solved (87%)
