@@ -4,6 +4,46 @@ This repository contains my solutions for the [Everybody Codes](https://everybod
 
 Everybody Codes is an annual coding challenge that runs throughout November, featuring daily programming puzzles released Monday to Friday. Each quest challenges your problem-solving skills and algorithmic thinking.
 
+<!-- SUMMARY:START -->
+## Progress
+
+> **Overall: 49/54 parts solved (91%)**
+
+### 2024 — Story
+
+`████████████████████` **9/9** parts solved (100%)
+
+| Quest | Part 1 | Part 2 | Part 3 |
+|:------|:------:|:------:|:------:|
+| Quest 01 | ⭐ | ⭐ | ⭐ |
+| Quest 02 | ⭐ | ⭐ | ⭐ |
+| Quest 03 | ⭐ | ⭐ | ⭐ |
+
+### 2025 — Event
+
+`██████████████████░░` **40/45** parts solved (89%)
+
+| Quest | Part 1 | Part 2 | Part 3 |
+|:------|:------:|:------:|:------:|
+| Quest 01 | ⭐ | ⭐ | ⭐ |
+| Quest 02 | ⭐ | ⭐ | ⭐ |
+| Quest 03 | ⭐ | ⭐ | ⭐ |
+| Quest 04 | ⭐ | ⭐ | ⭐ |
+| Quest 05 | ⭐ | ⭐ | ⭐ |
+| Quest 06 | ⭐ | ⭐ | ⭐ |
+| Quest 07 | ⭐ | ⭐ | ⭐ |
+| Quest 08 | ⭐ | ⭐ | ⬚ |
+| Quest 09 | ⭐ | ⭐ | ⭐ |
+| Quest 10 | ⭐ | ⬚ | ⬚ |
+| Quest 11 | ⭐ | ⭐ | ⭐ |
+| Quest 12 | ⭐ | ⭐ | ⭐ |
+| Quest 13 | ⭐ | ⭐ | ⭐ |
+| Quest 14 | ⭐ | ⭐ | ⭐ |
+| Quest 15 | ⭐ | ⬚ | ⬚ |
+
+<!-- SUMMARY:END -->
+
+
 ## Creating a New Quest
 
 To create a new quest structure, use the `new_quest.sh` script:
