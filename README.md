@@ -7,7 +7,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## Progress
 
-> **Overall: 48/54 parts solved (89%)**
+> **Overall: 47/54 parts solved (87%)**
 
 ### [2024 — Story: Echoes of Enigmatus](./2024/story/)
 
@@ -15,7 +15,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 
 ### [2025 — Event: The Song of Ducks and Dragons](./2025/event/)
 
-`█████████████████░░░` **39/45** parts solved (87%)
+`█████████████████░░░` **38/45** parts solved (84%)
 
 <!-- SUMMARY:END -->
 
