@@ -1,5 +1,6 @@
 import os
 from typing import List, Tuple
+from collections import deque
 from dataclasses import dataclass
 
 from utils.timer import timer
@@ -20,7 +21,7 @@ Part 3:
 """
 
 
-@dataclass
+@dataclass(frozen=True)
 class Coordinate:
     x: int
     y: int
@@ -31,40 +32,19 @@ class Coordinate:
 
 @timer
 def part1():
-    # TODO: Implement part 1
-    instructions = parse_file("input_sample01.txt")
+    instructions = parse_file("input01.txt")
     print(f"Instructions: {instructions}")
 
-    pos = Coordinate(0, 0)
-    dir = Coordinate(-1, 0)
-    boundaries = (Coordinate(0, 0), Coordinate(0, 0))
-    corners = [pos]
+    corners, boundaries = find_corners_and_boundaries(instructions, (0, 0))
+    tunnel, corners = build_tunnel(corners, boundaries)
+    path_length, path = find_shortest_path_with_trace(tunnel, corners[0], corners[-1])
 
-    for instruction in instructions:
-        # print(f"{tcolors.BLUE}Instruction: {instruction}{tcolors.RESET}")
-        # print(f"{tcolors.RED}Current position: {pos}{tcolors.RESET}")
-        # print(f"{tcolors.RED}Current direction: {dir}{tcolors.RESET}")
+    for cell in path:
+        tunnel[cell.x][cell.y] = tcolors.GREEN + "." + tcolors.RESET
 
-        side, length = instruction[0], int(instruction[1:])
-
-        if side == "R":
-            pos = Coordinate(pos.x + dir.y * length, pos.y - dir.x * length)
-            dir.x, dir.y = dir.y, -dir.x
-        else:
-            pos = Coordinate(pos.x - dir.y * length, pos.y + dir.x * length)
-            dir.x, dir.y = -dir.y, dir.x
-
-        # print(f"{tcolors.GREEN}New position: {pos}{tcolors.RESET}")
-        # print(f"{tcolors.GREEN}New direction: {dir}{tcolors.RESET}")
-        corners.append(pos)
-        boundaries = (
-            Coordinate(min(boundaries[0].x, pos.x), min(boundaries[0].y, pos.y)),
-            Coordinate(max(boundaries[1].x, pos.x), max(boundaries[1].y, pos.y)),
-        )
-
-    print(f"Boundaries: {boundaries}")
-    tunnel = build_tunnel(corners, boundaries)
     print_tunnel(tunnel)
+
+    print(f"Shortest path length: {path_length-1}")
 
 
 # (-1, 0) (0, 0) -> R3 -> (-3, 0) (0 +   0 , 0 - (-3)) (0, 3)
@@ -78,9 +58,19 @@ def part1():
 
 @timer
 def part2():
-    # TODO: Implement part 2
-    lines = parse_file("input_sample02.txt")
-    pass
+    instructions = parse_file("input02.txt")
+    print(f"Instructions: {instructions}")
+
+    corners, boundaries = find_corners_and_boundaries(instructions, (0, 0))
+    tunnel, corners = build_tunnel(corners, boundaries)
+    path_length, path = find_shortest_path_with_trace(tunnel, corners[0], corners[-1])
+
+    for cell in path:
+        tunnel[cell.x][cell.y] = tcolors.GREEN + "." + tcolors.RESET
+
+    print_tunnel(tunnel)
+
+    print(f"Shortest path length: {path_length-1}")
 
 
 @timer
@@ -90,9 +80,35 @@ def part3():
     pass
 
 
+def find_corners_and_boundaries(
+    instructions: List[str], start: Tuple[int, int]
+) -> Tuple[List[Coordinate], Tuple[Coordinate, Coordinate]]:
+    pos = Coordinate(start[0], start[1])
+    dir = Coordinate(-1, 0)
+    boundaries = (Coordinate(0, 0), Coordinate(0, 0))
+    corners = [pos]
+    for instruction in instructions:
+        side, length = instruction[0], int(instruction[1:])
+
+        if side == "R":
+            pos = Coordinate(pos.x + dir.y * length, pos.y - dir.x * length)
+            dir = Coordinate(dir.y, -dir.x)
+        else:
+            pos = Coordinate(pos.x - dir.y * length, pos.y + dir.x * length)
+            dir = Coordinate(-dir.y, dir.x)
+
+        corners.append(pos)
+        boundaries = (
+            Coordinate(min(boundaries[0].x, pos.x), min(boundaries[0].y, pos.y)),
+            Coordinate(max(boundaries[1].x, pos.x), max(boundaries[1].y, pos.y)),
+        )
+
+    return corners, boundaries
+
+
 def build_tunnel(
     corners: List[Coordinate], boundaries: Tuple[Coordinate]
-) -> List[List[str]]:
+) -> Tuple[List[List[str]], List[Coordinate]]:
     shift_x = abs(boundaries[0].x) if boundaries[0].x < 0 else 0
     shift_y = abs(boundaries[0].y) if boundaries[0].y < 0 else 0
 
@@ -114,15 +130,59 @@ def build_tunnel(
                 tunnel[i][pos.y + shift_y] = "#"
 
         pos = corner
-    
+
     # TODO I think this sucks
     tunnel.insert(0, ["#"] * size_y)
     tunnel.append(["#"] * size_y)
-    for i in range(size_x+2):
+    for i in range(size_x + 2):
         tunnel[i].insert(0, "#")
         tunnel[i].append("#")
 
-    return tunnel
+    new_corners = [
+        Coordinate(pos.x + shift_x + 1, pos.y + shift_y + 1) for pos in corners
+    ]
+    tunnel[new_corners[0].x][new_corners[0].y] = " "
+    tunnel[new_corners[-1].x][new_corners[-1].y] = " "
+
+    return tunnel, new_corners
+
+
+def find_shortest_path_with_trace(
+    tunnel: List[List[str]], start: Coordinate, end: Coordinate
+) -> Tuple[int, List[Coordinate]]:
+    if not tunnel or tunnel[start.x][start.y] == "#" or tunnel[end.x][end.y] == "#":
+        return -1, []  # Start or end is blocked
+
+    queue = deque([start])
+
+    # Store visited coordinates and their parent to trace back
+    visited = {start: None}
+
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+    while queue:
+        pos = queue.popleft()
+
+        # If we've reached the destination, backtrack to find the path
+        if pos == end:
+            path = []
+            curr = end
+            while curr is not None:
+                path.append(curr)
+                curr = visited[curr]
+            path.reverse()
+
+            # Distance is the number of nodes in the path
+            return len(path), path
+
+        for dr, dc in directions:
+            new_pos = Coordinate(pos.x + dr, pos.y + dc)
+
+            if tunnel[new_pos.x][new_pos.y] == " " and new_pos not in visited:
+                visited[new_pos] = pos
+                queue.append(new_pos)
+
+    return -1, []  # No path found
 
 
 def print_tunnel(tunnel: List[List[str]]) -> None:
@@ -148,5 +208,5 @@ def parse_file(file_name: str) -> Tuple[str]:
 
 
 part1()
-# part2()
+part2()
 # part3()
