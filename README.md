@@ -5,7 +5,7 @@ This repository contains my solutions for the [Everybody Codes](https://everybod
 Everybody Codes is an annual coding challenge that runs throughout November, featuring daily programming puzzles released Monday to Friday. Each quest challenges your problem-solving skills and algorithmic thinking.
 
 <!-- SUMMARY:START -->
-## Progress
+## 📊 Progress
 
 > **Overall: 47/54 parts solved (87%)**
 
@@ -19,8 +19,41 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 
 <!-- SUMMARY:END -->
 
+## 🛠️ Setup
 
-## Creating a New Quest
+### Creating a Virtual Environment
+
+```bash
+python3 -m venv .venv
+```
+
+### Activating the Virtual Environment
+
+On macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+On Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+### Installing Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Deactivating the Virtual Environment
+
+```bash
+deactivate
+```
+
+## ✨ Creating a New Quest
 
 To create a new quest structure, use the `new_quest.sh` script:
 
@@ -39,7 +72,7 @@ This will create:
 - `input01.txt`, `input02.txt`, `input03.txt` for the quest input
 - `input_sample01.txt`, `input_sample02.txt`, `input_sample03.txt` for sample/test input
 
-## Running Solutions
+## 🚀 Running Solutions
 
 You can run the solutions:
 
@@ -49,7 +82,7 @@ python3 -m 2025.event.quest01.main
 
 Replace `2025` with the desired year and `quest01` with the specific quest you want to run.
 
-## Updating Progress Summary
+## 🔄 Updating Progress Summary
 
 To update the progress summary in this README after solving new parts, run the `generate_readme.py` script:
 

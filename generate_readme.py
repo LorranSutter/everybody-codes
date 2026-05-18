@@ -110,7 +110,7 @@ def read_type_title(root: Path, year: str, quest_type: str) -> str:
 def generate_root_summary(root: Path, results: dict) -> str:
     """Generates the root README summary with progress bars only (no tables)."""
     lines = []
-    lines.append("## Progress")
+    lines.append("## 📊 Progress")
     lines.append("")
 
     total_solved = 0
