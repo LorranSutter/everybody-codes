@@ -10,7 +10,7 @@ from shapely.plotting import plot_line
 from itertools import combinations
 
 from utils.timer import timer
-from utils.utils import tcolors
+from utils.utils import tcolors, print_matrix
 
 """
 Preprocessing:
@@ -110,7 +110,7 @@ def part1():
     for cell in path:
         tunnel[cell.x][cell.y] = tcolors.GREEN + "." + tcolors.RESET
 
-    print_tunnel(tunnel)
+    print_matrix(tunnel)
 
     print(f"Shortest path length: {path_length-1}")
 
@@ -128,13 +128,13 @@ def part2():
     for cell in path:
         tunnel[cell.x][cell.y] = tcolors.GREEN + "." + tcolors.RESET
 
-    print_tunnel(tunnel)
+    print_matrix(tunnel)
 
     print(f"Shortest path length: {path_length-1}")
 
 
 @timer
-def part3():    
+def part3():
     instructions = parse_file("input03.txt")
 
     corners, expanded_corners = find_expanded_corners(
@@ -450,11 +450,6 @@ def get_direction(pos1: Coordinate, pos2: Coordinate) -> Coordinate:
         (pos2.x - pos1.x) // abs(pos2.x - pos1.x) if pos2.x != pos1.x else 0,
         (pos2.y - pos1.y) // abs(pos2.y - pos1.y) if pos2.y != pos1.y else 0,
     )
-
-
-def print_tunnel(tunnel: List[List[str]]) -> None:
-    for row in tunnel:
-        print("".join(row))
 
 
 def plot_tunnel(
