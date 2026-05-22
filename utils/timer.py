@@ -1,6 +1,8 @@
 import time
 import functools
 
+from utils.utils import tcolors
+
 
 def timer(func):
     """
@@ -13,7 +15,7 @@ def timer(func):
         result = func(*args, **kwargs)
         end_time = time.perf_counter()
         execution_time = end_time - start_time
-        print(f"Function {func.__name__!r} took: {execution_time:f} seconds")
+        print(f"Function {func.__name__!r} took: {tcolors.RED}{execution_time:f}{tcolors.RESET} seconds")
         return result
 
     return wrapper_timer
