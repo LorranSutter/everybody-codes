@@ -1,5 +1,7 @@
 # :duck: Everybody Codes
 
+[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue)](https://github.com/LorranSutter/coding-challenges)
+
 This repository contains my solutions for the [Everybody Codes](https://everybody.codes) event.
 
 Everybody Codes is an annual coding challenge that runs throughout November, featuring daily programming puzzles released Monday to Friday. Each quest challenges your problem-solving skills and algorithmic thinking.
@@ -7,7 +9,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## 📊 Progress
 
-> **Overall: 52/54 parts solved (96%)**
+> **Overall: 54/57 parts solved (95%)**
 
 ### [2024 — Story: Echoes of Enigmatus](./2024/story/)
 
@@ -15,7 +17,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 
 ### [2025 — Event: The Song of Ducks and Dragons](./2025/event/)
 
-`███████████████████░` **43/45** parts solved (96%)
+`███████████████████░` **45/48** parts solved (94%)
 
 <!-- SUMMARY:END -->
 
