@@ -21,10 +21,10 @@ Part 3:
 
 @timer
 def part1():
-    pattern = parse_file("input01.txt")
+    spells = parse_file("input01.txt")
     wall_size = 90
 
-    total = sum(wall_size // spell for spell in pattern)
+    total = calc_blocks(spells, wall_size)
 
     print(f"Total blocks need to build the wall: {total}")
 
@@ -34,12 +34,7 @@ def part2():
     blocks = parse_file("input02.txt")
     wall_size = len(blocks)
 
-    spells = []
-    for i, block in enumerate(blocks, 1):
-        if block > 0:
-            for j in range(i - 1, wall_size, i):
-                blocks[j] -= 1
-            spells.append(i)
+    spells = calc_spells(blocks, wall_size)
 
     print(f"Spells used: {spells}")
     print(f"Product of spells that generated the wall: {math.prod(spells)}")
@@ -47,9 +42,35 @@ def part2():
 
 @timer
 def part3():
-    # TODO: Implement part 3
-    lines = parse_file("input_sample03.txt")
-    pass
+    blocks = parse_file("input03.txt")
+    wall_size = len(blocks)
+    num_blocks = 202520252025000
+
+    spells = calc_spells(blocks, wall_size)
+    print(f"Spells used: {spells}")
+
+    K = sum(1 / spell for spell in spells)
+
+    wall_size = int(num_blocks / K)
+    while calc_blocks(spells, wall_size + 1) <= num_blocks:
+        wall_size += 1
+
+    print(f"Number of wall colums: {wall_size}")
+
+
+def calc_blocks(spells: List[int], wall_size: int) -> int:
+    return sum(wall_size // spell for spell in spells)
+
+
+def calc_spells(blocks: List[int], wall_size: int) -> List[int]:
+    spells = []
+    for i, block in enumerate(blocks, 1):
+        if block > 0:
+            for j in range(i - 1, wall_size, i):
+                blocks[j] -= 1
+            spells.append(i)
+
+    return spells
 
 
 def parse_file(file_name: str) -> List[int]:
@@ -62,4 +83,4 @@ def parse_file(file_name: str) -> List[int]:
 
 part1()
 part2()
-# part3()
+part3()
