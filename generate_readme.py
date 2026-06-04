@@ -107,6 +107,14 @@ def read_type_title(root: Path, year: str, quest_type: str) -> str:
     return fallback
 
 
+def get_total_quests(quest_type: str) -> int:
+    """Returns the expected total number of quests for a given type."""
+    if quest_type == "story":
+        return 3
+    # "event" type has 20 quests
+    return 20
+
+
 def generate_root_summary(root: Path, results: dict) -> str:
     """Generates the root README summary with progress bars only (no tables)."""
     lines = []
@@ -126,7 +134,8 @@ def generate_root_summary(root: Path, results: dict) -> str:
             solved = sum(
                 1 for q in quests.values() for p, s in q.items() if s
             )
-            total = sum(len(q) for q in quests.values())
+            total_quests = get_total_quests(quest_type)
+            total = total_quests * 3
             total_solved += solved
             total_parts += total
 
@@ -152,8 +161,9 @@ def generate_type_readme(year: str, quest_type: str, quests: dict) -> str:
     """Generates the quest table for a year/type README."""
     type_label = quest_type.capitalize()
 
+    total_quests = get_total_quests(quest_type)
     solved = sum(1 for q in quests.values() for p, s in q.items() if s)
-    total = sum(len(q) for q in quests.values())
+    total = total_quests * 3
     pct = (solved / total * 100) if total > 0 else 0
     filled = round(pct / 5)
     bar = "█" * filled + "░" * (20 - filled)
@@ -164,17 +174,24 @@ def generate_type_readme(year: str, quest_type: str, quests: dict) -> str:
     lines.append("| Quest | Part 1 | Part 2 | Part 3 |")
     lines.append("|:------|:------:|:------:|:------:|")
 
-    for quest_num in sorted(quests.keys()):
-        parts = quests[quest_num]
-        cols = []
-        for p in [1, 2, 3]:
-            cols.append("⭐" if parts.get(p, False) else "⬚")
-        lines.append(
-            f"| [Quest {quest_num:02d}](./quest{quest_num:02d}/) | {cols[0]} | {cols[1]} | {cols[2]} |"
-        )
+    max_quest = max([total_quests] + list(quests.keys()))
+    for quest_num in range(1, max_quest + 1):
+        if quest_num in quests:
+            parts = quests[quest_num]
+            cols = []
+            for p in [1, 2, 3]:
+                cols.append("⭐" if parts.get(p, False) else "⬚")
+            lines.append(
+                f"| [Quest {quest_num:02d}](./quest{quest_num:02d}/) | {cols[0]} | {cols[1]} | {cols[2]} |"
+            )
+        else:
+            lines.append(
+                f"| Quest {quest_num:02d} | ⬚ | ⬚ | ⬚ |"
+            )
 
     lines.append("")
     return "\n".join(lines)
+
 
 
 def inject_between_markers(content: str, summary: str, default_header: str) -> str:

@@ -1,7 +1,7 @@
 # 2025 — Event: The Song of Ducks and Dragons
 
 <!-- SUMMARY:START -->
-`███████████████████░` **46/48** parts solved (96%)
+`███████████████░░░░░` **46/60** parts solved (77%)
 
 | Quest | Part 1 | Part 2 | Part 3 |
 |:------|:------:|:------:|:------:|
@@ -21,5 +21,9 @@
 | [Quest 14](./quest14/) | ⭐ | ⭐ | ⭐ |
 | [Quest 15](./quest15/) | ⭐ | ⭐ | ⭐ |
 | [Quest 16](./quest16/) | ⭐ | ⭐ | ⭐ |
+| Quest 17 | ⬚ | ⬚ | ⬚ |
+| Quest 18 | ⬚ | ⬚ | ⬚ |
+| Quest 19 | ⬚ | ⬚ | ⬚ |
+| Quest 20 | ⬚ | ⬚ | ⬚ |
 
 <!-- SUMMARY:END -->
