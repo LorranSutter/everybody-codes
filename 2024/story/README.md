@@ -1,7 +1,7 @@
 # 2024 — Story: Echoes of Enigmatus
 
 <!-- SUMMARY:START -->
-`████████████████████` **9/9** parts solved (100%)
+`█████████` **9/9** parts solved (100%)
 
 | Quest | Part 1 | Part 2 | Part 3 |
 |:------|:------:|:------:|:------:|

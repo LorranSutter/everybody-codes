@@ -140,8 +140,8 @@ def generate_root_summary(root: Path, results: dict) -> str:
             total_parts += total
 
             pct = (solved / total * 100) if total > 0 else 0
-            filled = round(pct / 5)
-            bar = "█" * filled + "░" * (20 - filled)
+            unsolved = total - solved
+            bar = "█" * solved + "░" * unsolved
 
             section_lines.append(f"### [{title}](./{year}/{quest_type}/)")
             section_lines.append("")
@@ -165,8 +165,8 @@ def generate_type_readme(year: str, quest_type: str, quests: dict) -> str:
     solved = sum(1 for q in quests.values() for p, s in q.items() if s)
     total = total_quests * 3
     pct = (solved / total * 100) if total > 0 else 0
-    filled = round(pct / 5)
-    bar = "█" * filled + "░" * (20 - filled)
+    unsolved = total - solved
+    bar = "█" * solved + "░" * unsolved
 
     lines = []
     lines.append(f"`{bar}` **{solved}/{total}** parts solved ({pct:.0f}%)")

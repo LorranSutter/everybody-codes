@@ -1,7 +1,7 @@
 # 2025 — Event: The Song of Ducks and Dragons
 
 <!-- SUMMARY:START -->
-`███████████████░░░░░` **46/60** parts solved (77%)
+`██████████████████████████████████████████████░░░░░░░░░░░░░░` **46/60** parts solved (77%)
 
 | Quest | Part 1 | Part 2 | Part 3 |
 |:------|:------:|:------:|:------:|
