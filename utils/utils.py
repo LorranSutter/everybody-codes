@@ -1,4 +1,6 @@
-from typing import List, Union
+from typing import List, Optional, Union
+
+import matplotlib.pyplot as plt
 
 
 class bcolors:
@@ -38,3 +40,32 @@ def print_matrix(
     """
     for row in matrix:
         print(sep.join(str(elem).rjust(min_width) for elem in row))
+
+
+def plot_points(
+    points: List[Union[int, float]],
+    points2: Optional[List[Union[int, float]]] = None,
+    points2_x: Optional[List[Union[int, float]]] = None,
+    title: str = "",
+):
+    """Plot one or two lists of values as a 2D scatter, with a grid.
+
+    Args:
+        points: Y values, plotted against X = 1..len(points).
+        points2: Optional second set of Y values, plotted in a different color
+            on the same figure.
+        points2_x: X coordinates for points2. Defaults to 1..len(points2) if
+            not given.
+        title: Optional plot title.
+    """
+    plt.figure()
+    plt.scatter(range(1, len(points) + 1), points, color="tab:blue")
+    if points2 is not None:
+        x2 = points2_x if points2_x is not None else range(1, len(points2) + 1)
+        plt.scatter(x2, points2, color="tab:red")
+    if title:
+        plt.title(title)
+    plt.xlabel("Index")
+    plt.ylabel("Value")
+    plt.grid(True)
+    plt.show()
