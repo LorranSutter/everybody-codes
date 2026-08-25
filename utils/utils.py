@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 
 class bcolors:
@@ -26,6 +26,15 @@ class tcolors:
     RESET = "\033[0m"
 
 
-def print_matrix(matrix: List[List[str]]):
+def print_matrix(
+    matrix: List[List[Union[str, int, float]]], sep: str = "", min_width: int = 0
+):
+    """Print a 2D matrix, one row per line.
+
+    Args:
+        matrix: Rows of values to print.
+        sep: String inserted between elements in a row.
+        min_width: Minimum width each element is right-justified to.
+    """
     for row in matrix:
-        print("".join(row))
+        print(sep.join(str(elem).rjust(min_width) for elem in row))
