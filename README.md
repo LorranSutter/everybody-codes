@@ -1,6 +1,6 @@
 # :duck: Everybody Codes
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-64-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
+[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-67-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
 
 This repository contains my solutions for the [Everybody Codes](https://everybody.codes) event.
 
@@ -9,11 +9,11 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## 📊 Progress
 
-> **Overall: 64/129 parts solved (50%)**
+> **Overall: 67/129 parts solved (52%)**
 
 ### [2024 — The Kingdom of Algorithmia](./2024/event/)
 
-`█████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **9/60** parts solved (15%)
+`████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **12/60** parts solved (20%)
 
 ### [2024 — Story: Echoes of Enigmatus](./2024/story/)
 
