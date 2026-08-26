@@ -40,7 +40,7 @@ class Dancers:
             position = 2 * len(target_col) - position
         target_col.insert(position, idx)
 
-    def shout(self):
+    def shout(self) -> int:
         return int("".join(str(self.dancers[i][0]) for i in range(self.size)))
 
 
@@ -68,13 +68,11 @@ def part2():
 
     rounds = 0
     target_repeats = 2024
-    repeated_shouts = {}
     shouts_count = Counter()
     for i in cycle(range(dancers.size)):
         dancers.dance(i)
 
         shouted = dancers.shout()
-        repeated_shouts[shouted] = rounds
         shouts_count[shouted] += 1
         rounds += 1
         if shouts_count[shouted] == target_repeats:
