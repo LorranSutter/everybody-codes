@@ -43,34 +43,48 @@ Part 3:
 
 
 @timer
-def part1():
+def part1(plot: bool = False):
     ornaments = parse_file("input01.txt")
 
     sum_last_visited = 0
     for ornament in ornaments:
         current = 0
         visited = set([0])
+        # True -> below, False -> above
+        intervals = {True: [], False: []}
+        below = True
         for jump in ornament:
+            previous = current
             # Jump backwards
             current -= jump
             if current < 0 or current in visited:
                 # Jump forwards
                 current += 2 * jump
             visited.add(current)
+            intervals[below].append(sorted((previous, current)))
+            below = not below
+
         sum_last_visited += current
+
+        if plot:
+            plot_arcs(intervals[True], intervals[False])
 
     print(f"Sum of last visited: {sum_last_visited}")
 
 
 @timer
-def part2():
+def part2(plot: bool = False):
     ornaments = parse_file("input02.txt")
 
     sum_last_visited = 0
     for ornament in ornaments:
         current = 0
         visited = set([0])
+        # True -> below, False -> above
+        intervals = {True: [], False: []}
+        below = True
         for jump in ornament:
+            previous = current
             # Jump backwards
             current -= jump
             if current < 0 or current in visited:
@@ -79,13 +93,19 @@ def part2():
                 while current in visited:
                     current += 1
             visited.add(current)
+            intervals[below].append(sorted((previous, current)))
+            below = not below
+
         sum_last_visited += current
+
+        if plot:
+            plot_arcs(intervals[True], intervals[False])
 
     print(f"Sum of last visited: {sum_last_visited}")
 
 
 @timer
-def part3():
+def part3(plot=False):
     ornaments = parse_file("input_sample03.txt")
 
     sum_last_visited = 0
@@ -111,8 +131,10 @@ def part3():
             visited.add(current)
             below = not below
 
-        # plot_arcs(intervals[True], intervals[False])
         sum_last_visited += current
+
+        if plot:
+            plot_arcs(intervals[True], intervals[False])
 
     print(f"Sum of last visited: {sum_last_visited}")
 
