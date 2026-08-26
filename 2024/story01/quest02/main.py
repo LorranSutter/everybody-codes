@@ -33,7 +33,7 @@ Part 2:
 
 Part 3:
 - Here, since we have to swap the whole branch, the process is a bit different from part 2.
-- We don't just perform a simple DFS to fiind the node by the ID. Instead, we return the parent of the nodes to be swapped.
+- We don't just perform a simple DFS to find the node by the ID. Instead, we return the parent of the nodes to be swapped.
 - Also, since it is a binary tree, we have to mind if the nodes are on the left or the right and perform the swap accordingly.
 - The trick to save the levels during insertion does not work here anymore, so we have to update the levels of each node after all insertions and swaps.
 - Then, we can call the find_message function to get the new message.
