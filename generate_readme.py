@@ -109,7 +109,7 @@ def read_type_title(root: Path, year: str, quest_type: str) -> str:
 
 def get_total_quests(quest_type: str) -> int:
     """Returns the expected total number of quests for a given type."""
-    if quest_type == "story":
+    if re.match(r"story\d*$", quest_type):
         return 3
     # "event" type has 20 quests
     return 20
