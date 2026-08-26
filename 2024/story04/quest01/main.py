@@ -1,6 +1,9 @@
 import os
 from typing import List, Tuple
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 from utils.timer import timer
 
 """
@@ -83,7 +86,7 @@ def part2():
 
 @timer
 def part3():
-    ornaments = parse_file("input03.txt")
+    ornaments = parse_file("input_sample03.txt")
 
     sum_last_visited = 0
     for ornament in ornaments:
@@ -108,6 +111,7 @@ def part3():
             visited.add(current)
             below = not below
 
+        # plot_arcs(intervals[True], intervals[False])
         sum_last_visited += current
 
     print(f"Sum of last visited: {sum_last_visited}")
@@ -153,6 +157,33 @@ def crosses_any(line: List[int], intervals: List[List[int]]):
             return True
 
     return False
+
+
+def plot_arcs(below_arcs: List[Tuple[int, int]], above_arcs: List[Tuple[int, int]]):
+    """Draw the below/above arcs as half-circles hanging off a shared horizontal line."""
+    _, ax = plt.subplots(figsize=(12, 6))
+    ax.axhline(0, color="black", linewidth=1, zorder=1)
+
+    for a, b in below_arcs:
+        _plot_arc(ax, a, b, below=True, color="tab:blue")
+    for a, b in above_arcs:
+        _plot_arc(ax, a, b, below=False, color="tab:red")
+
+    ax.grid(False)
+    ax.set_aspect("equal")
+    ax.set_yticks([])
+    plt.show()
+
+
+def _plot_arc(ax, a: int, b: int, below: bool, color: str):
+    center = (a + b) / 2
+    radius = abs(b - a) / 2
+    theta = np.linspace(0, np.pi, 100)
+    x = center + radius * np.cos(theta)
+    y = radius * np.sin(theta)
+    if below:
+        y = -y
+    ax.plot(x, y, color=color, linewidth=1.5, zorder=2)
 
 
 def parse_file(file_name: str) -> List[Tuple[int]]:
