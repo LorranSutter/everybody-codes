@@ -1,6 +1,6 @@
 # :duck: Everybody Codes
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-67-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
+[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-70-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
 
 This repository contains my solutions for the [Everybody Codes](https://everybody.codes) event.
 
@@ -9,15 +9,19 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## 📊 Progress
 
-> **Overall: 67/129 parts solved (52%)**
+> **Overall: 70/138 parts solved (51%)**
 
 ### [2024 — The Kingdom of Algorithmia](./2024/event/)
 
 `████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **12/60** parts solved (20%)
 
-### [2024 — Story: Echoes of Enigmatus](./2024/story/)
+### [2024 — Story: Echoes of Enigmatus](./2024/story01/)
 
 `█████████` **9/9** parts solved (100%)
+
+### [2024 — Story: The Digital Atelier](./2024/story04/)
+
+`███░░░░░░` **3/9** parts solved (33%)
 
 ### [2025 — Event: The Song of Ducks and Dragons](./2025/event/)
 
@@ -64,16 +68,19 @@ deactivate
 To create a new quest structure, use the `new_quest.sh` script:
 
 ```bash
-./new_quest.sh <year> <event|story> <quest>
+./new_quest.sh <year> <event|storyNN> <quest>
 ```
 
-Example:
+Each year has a single `event`; stories are numbered folders (`story01`, `story02`, …) matching the [everybody.codes](https://everybody.codes) story order.
+
+Examples:
 ```bash
 ./new_quest.sh 2025 event 1
+./new_quest.sh 2024 story04 1
 ```
 
 This will create:
-- A folder structure: `2025/event/quest01/`
+- A folder structure: `2025/event/quest01/` (or `2024/story04/quest01/`)
 - `main.py` with a template for part 1, part 2 and part 3
 - `input01.txt`, `input02.txt`, `input03.txt` for the quest input
 - `input_sample01.txt`, `input_sample02.txt`, `input_sample03.txt` for sample/test input
