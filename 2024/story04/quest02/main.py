@@ -24,12 +24,14 @@ Part 2:
 Part 3:
 - There's no MOVES sequence now: the next beacon is chosen at random, so we want every square that
   could ever be illuminated by some sequence of choices.
-- I went with a brute-forcy fixpoint. Each round, for every beetle square found so far, take the
-  midpoint towards every one of the three beacons and add the results back into the set. Stop once a
-  full round doesn't grow the set any more.
+- This is a flood fill over the reachable squares. We keep two sets: `beetles` with everything seen
+  so far, and `current_beetles`, the frontier we still need to expand. Each round, for every square in
+  the frontier we take the midpoint towards all three beacons; any result that's new goes into
+  `beetles` and into the next frontier. When the frontier comes up empty, every reachable square has
+  been found.
+- Expanding only the frontier (not the whole set) each round is what keeps this fast — a square is
+  processed once, right after it's discovered.
 - Then run the same firefly calculation as part 2 to get the final answer.
-- Obs: this recomputes the same midpoints many times over, since it re-expands every square every
-  round. A better way would be some recursive approach that only follows the squares added last round.
 """
 
 
@@ -37,7 +39,7 @@ Part 3:
 def part1():
     start, beacons, moves = parse_file("input01.txt")
 
-    beetles = set([start])
+    beetles = {start}
     pos = start
     for move in moves:
         pos = midpoint(beacons[move], pos)
@@ -50,7 +52,7 @@ def part1():
 def part2():
     start, beacons, moves = parse_file("input02.txt")
 
-    beetles = set([start])
+    beetles = {start}
     pos = start
     for move in moves:
         pos = midpoint(beacons[move], pos)
@@ -64,16 +66,19 @@ def part2():
 @timer
 def part3():
     start, beacons, _ = parse_file("input03.txt")
+    beacons = beacons.values()
 
-    beetles = set([start])
-    illuminated = 0
-    while True:
-        for beetle in beetles.copy():
-            for b in beacons.values():
-                beetles.add(midpoint(b, beetle))
-        if len(beetles) <= illuminated:
-            break
-        illuminated = len(beetles)
+    beetles = {start}
+    current_beetles = {start}
+    while current_beetles:
+        new_beetles = set()
+        for beetle in current_beetles:
+            for b in beacons:
+                p = midpoint(b, beetle)
+                if p not in beetles:
+                    beetles.add(p)
+                    new_beetles.add(p)
+        current_beetles = new_beetles
 
     fireflies = calculate_fireflies(beetles)
 
