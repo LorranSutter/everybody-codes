@@ -2,6 +2,7 @@ import os
 from typing import Dict, Tuple, Set
 
 from utils.timer import timer
+from utils.utils import tcolors
 
 """
 Preprocessing:
@@ -36,7 +37,7 @@ Part 3:
 
 
 @timer
-def part1():
+def part1(plot=False):
     start, beacons, moves = parse_file("input01.txt")
 
     beetles = {start}
@@ -45,11 +46,14 @@ def part1():
         pos = midpoint(beacons[move], pos)
         beetles.add(pos)
 
+    if plot:
+        plot_sky(beetles)
+
     print(f"Illuminated squares: {len(beetles)}")
 
 
 @timer
-def part2():
+def part2(plot=False):
     start, beacons, moves = parse_file("input02.txt")
 
     beetles = {start}
@@ -60,11 +64,14 @@ def part2():
 
     fireflies = calculate_fireflies(beetles)
 
+    if plot:
+        plot_sky(beetles, fireflies)
+
     print(f"Number of fireflies: {len(fireflies)}")
 
 
 @timer
-def part3():
+def part3(plot=False):
     start, beacons, _ = parse_file("input03.txt")
     beacons = beacons.values()
 
@@ -81,6 +88,9 @@ def part3():
         current_beetles = new_beetles
 
     fireflies = calculate_fireflies(beetles)
+
+    if plot:
+        plot_sky(beetles)
 
     print(f"Number of fireflies: {len(fireflies)}")
 
@@ -100,6 +110,33 @@ def calculate_fireflies(beetles: Set[Tuple[int, int]]) -> Set[Tuple[int, int]]:
                 fireflies.add(new_position)
 
     return fireflies
+
+
+def plot_sky(
+    beetles: Set[Tuple[int, int]],
+    fireflies: Set[Tuple[int, int]] = frozenset(),
+):
+    """Print the sky to the terminal, in the style of the puzzle description.
+
+    Beetles are drawn as a green X, fireflies as a yellow F, dark squares as a dot.
+    Y grows upward, so rows are printed from the highest Y down to the lowest.
+    """
+    points = beetles | fireflies
+    min_x = min(x for x, _ in points)
+    max_x = max(x for x, _ in points)
+    min_y = min(y for _, y in points)
+    max_y = max(y for _, y in points)
+
+    for y in range(max_y, min_y - 1, -1):
+        row = []
+        for x in range(min_x, max_x + 1):
+            if (x, y) in beetles:
+                row.append(f"{tcolors.GREEN}X{tcolors.RESET}")
+            elif (x, y) in fireflies:
+                row.append(f"{tcolors.YELLOW}F{tcolors.RESET}")
+            else:
+                row.append(".")
+        print("".join(row))
 
 
 def parse_file(
