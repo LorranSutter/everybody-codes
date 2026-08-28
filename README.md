@@ -1,6 +1,6 @@
 # :duck: Everybody Codes
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-76-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
+[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-78-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
 
 This repository contains my solutions for the [Everybody Codes](https://everybody.codes) event.
 
@@ -9,7 +9,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## 📊 Progress
 
-> **Overall: 76/138 parts solved (55%)**
+> **Overall: 78/138 parts solved (57%)**
 
 ### [2024 — The Kingdom of Algorithmia](./2024/event/)
 
@@ -21,7 +21,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 
 ### [2024 — Story: The Digital Atelier](./2024/story04/)
 
-`██████░░░` **6/9** parts solved (67%)
+`████████░` **8/9** parts solved (89%)
 
 ### [2025 — Event: The Song of Ducks and Dragons](./2025/event/)
 
