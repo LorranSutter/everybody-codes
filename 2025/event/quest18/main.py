@@ -7,47 +7,50 @@ from utils.timer import timer
 
 """
 Preprocessing:
-- Created a directed weighed graph to use as the data structure for this problem
+- Created a directed weighted graph as the data structure for this problem. Edges point in the direction energy
+  flows, from a source plant to the plant it feeds.
 - Each node of the graph represents a plant, that has:
     - id -> id of the plant
-    - thickness -> thickness of the plant that interfeers in the brightness
+    - thickness -> thickness of the plant that interferes with the brightness
     - energy -> the current accumulated energy of the plant, initially 0
-- When we read the file, we add the plant Ids to the graph, along with the thickness
-  and set the energy to 0
-- When we have a branch, we create an edge between two plants, and the thickness
-  is the weight associated.
-- To handle the free branches, I created a node 0, that is connected to all
-  plants that is defined as free branch. Also, the node 0 is the only one
-  that starts with energy 1, otherwise the whole system energy would be 0.
+- When we read the file, we add the plant ids to the graph along with the thickness, and set the energy to 0.
+- When we have a branch, we create an edge between two plants, and the branch thickness is the weight associated.
+- To handle the free branches, I created a node 0 that is connected to every plant with a free branch. Node 0 is
+  also the only node that starts with energy 1, otherwise the whole system energy would be 0.
+- If a block in the file has no "Plant" in it, it is the list of part 2 test cases: each line becomes a tuple of
+  0/1 ints, one flag per free branch.
 
 Part 1:
-- Here we pretty much perform a topological sort (Kahn's Algorithm), where we find
-  the "in degree" of each node initially, that is pretty much the number of connections
-  that this node is receiving (the branches). Then we start iterating over the nodes
-  with "in degree" 0 similarly to a BFS. Every time we find a new node that is connected
-  to the current node in the iteration, we reduce its "in degree". When it is 0,
-  we can add it to the queue, so it will be consumed next.
-- The adition here is the calculation of the energy in every iteration. We created
-  an array called incoming_energy that holds the current energy of each node. 0 for
-  everyone except the node 0.
-- In every iteration we accumulate the energy in the corresponding node in the incoming_energy
-  array. We do that instead of altering the energy property of the node directly, because
-  we must have all incoming energy from the connected branches first.
-- Once the node reaches "in degree" 0, we check if the incoming energy of this node
-  is equal or greather than its thickness. If so, we can set the node energy to the
-  calculated value, otherwise, it becomes 0
-- At the end of the algorithm, we will have the energy of all plants, so we can
-  output the value of the last plant as the answer.
+- Here we pretty much perform a topological sort (Kahn's Algorithm), where we find the "in degree" of each node
+  initially, that is pretty much the number of connections that this node is receiving (the branches). Then we
+  start iterating over the nodes with "in degree" 0 similarly to a BFS. Every time we find a new node that is
+  connected to the current node in the iteration, we reduce its "in degree". When it is 0, we can add it to the
+  queue, so it will be consumed next.
+- The addition here is the calculation of the energy in every iteration. We created an array called incoming_energy
+  that holds the current energy of each node, 0 for everyone except the node 0.
+- In every iteration we accumulate the energy in the corresponding node in the incoming_energy array. We do that
+  instead of altering the energy property of the node directly, because we must have all incoming energy from the
+  connected branches first.
+- Once the node reaches "in degree" 0, we check if the incoming energy of this node is equal or greater than its
+  thickness. If so, we can set the node energy to the calculated value, otherwise it becomes 0. A non-glowing
+  plant keeps energy 0, so it naturally passes 0 down every outgoing branch.
+- At the end of the algorithm we will have the energy of all plants, so we can output the value of the last plant
+  (the highest-numbered one) as the answer.
+
+Obs: incoming_energy is a plain list indexed directly by node id, which only works because the nodes happen to be
+  inserted in id order 0, 1, 2, ... - a dict keyed by id would be safer.
 
 Part 2:
-- Pretty much the same simulation from part 1 for several different cases.
-- Since we have to activate or not the initial plants, we can simple reuse all
-  logic from part 1, just setting the initial weight to 0 when we have to 
-  deactivate some plant. After that, we can normaly run the modified topological
-  sort algorithm.
-- We update the inital weights for all plants, run the algorithm and get the 
-  energy of the last plant, and acumulate to the final answer.
-- We just have to remember to reset the energy of the plants after every iteration.
+- Since we have to activate or not the initial plants, we can simply reuse all the logic from part 1, just
+  overwriting the free-branch edge weight (0 -> plant) with the test case's flag. Free branches always have
+  thickness 1, so weight 1 delivers energy 1 and the plant glows, weight 0 delivers 0 and it stays dark. After
+  that, we can normally run the modified topological sort algorithm.
+- The negative branch thicknesses introduced here need no special handling: the multiply and the ">= thickness"
+  check already cover them, since negative incoming energy is below any positive thickness.
+- We update the initial weights for all plants, run the algorithm, get the energy of the last plant, and
+  accumulate it to the final answer.
+- We just have to remember to reset the energy of the plants (and node 0 back to 1) after every iteration, because
+  calculate_brightness reseeds incoming_energy from those values.
 
 Part 3:
 -
