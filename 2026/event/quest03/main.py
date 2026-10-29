@@ -28,7 +28,10 @@ Part 3:
   happens because the weights of lower positions can pay for a unit of a higher one: here the digit at position 1
   is worth 2, so lowering it by one and raising the units digit by 2 changes nothing.
 - This means that we can't just look at one position. Any digit can be traded for a bunch of lower digits.
-- Note: the current solution is brute force and not optimal. For each vote we convert every smaller number and check
+
+
+Note:
+- The current solution is brute force and not optimal. For each vote we convert every smaller number and check
   if one of them has the same score. The votes are small enough for this to finish in a fraction of a second, but
   it grows with the value of the vote.
 - Faster solution (not implemented): build the smallest representation of the score directly, going from the most
