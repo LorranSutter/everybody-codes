@@ -50,7 +50,6 @@ echo "Created folder: $folder_name"
 # Create main.py file
 cat > "$folder_name/main.py" << 'EOF'
 import os
-from typing import Tuple
 
 from utils.timer import timer
 
@@ -90,7 +89,7 @@ def part3():
     pass
 
 
-def parse_file(file_name: str) -> Tuple[str]:
+def parse_file(file_name: str) -> tuple[str]:
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 
