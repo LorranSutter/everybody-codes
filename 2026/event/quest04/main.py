@@ -68,8 +68,8 @@ class Ranking:
 
 @timer
 def part3():
-    # 5151936, length correct, first character incorrect
     # TODO: Implement part 3
+    # 5151936, length correct, first character incorrect
     all_results = parse_file("input_sample03.txt")
     part_points = [50, 100, 150]
 

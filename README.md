@@ -1,6 +1,6 @@
 # :duck: Everybody Codes
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-113-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
+[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-112-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://everybody.codes)<!-- BADGE:END -->
 
 This repository contains my solutions for the [Everybody Codes](https://everybody.codes) event.
 
@@ -9,7 +9,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 <!-- SUMMARY:START -->
 ## 📊 Progress
 
-> **Overall: 113/198 parts solved (57%)**
+> **Overall: 112/198 parts solved (57%)**
 
 ### [2024 — The Kingdom of Algorithmia](./2024/event/)
 
@@ -29,7 +29,7 @@ Everybody Codes is an annual coding challenge that runs throughout November, fea
 
 ### [2026 — Event: Lord of the Wings](./2026/event/)
 
-`█████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **25/60** parts solved (42%)
+`████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **24/60** parts solved (40%)
 
 <!-- SUMMARY:END -->
 
